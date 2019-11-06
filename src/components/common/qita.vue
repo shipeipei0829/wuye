@@ -1,25 +1,33 @@
 <template>
-  <div class="fenbu">
-   人员分布
+  <div class="userAdd" id="userAdd">
+   
   </div>
 </template>
 
 <script>
+
 export default {
-  name: "fenbu",
+  name: "userAdd",
+  created() {
+ 
+  },
+  mounted() {
+  
+  },
   data() {
     return {
-      loginManage: ""
+   
     };
   },
-  methods: {}
+  props: {},
+  methods: {
+    
+  },
+  computed: {}
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.fenbu{
-   color: #fff;
-}
-</style>
 
+</style>

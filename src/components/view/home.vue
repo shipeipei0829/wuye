@@ -4,11 +4,15 @@
       <!-- 项目分布图 -->
       <div class="contanier_l_map boxShadow bdRadius">
         <h2>项目分布图</h2>
+        <Maps />
       </div>
       <!-- 增长趋势对比 -->
       <div class="contanier_l_add boxShadow bdRadius">
         <h3>增长趋势对比</h3>
-        
+        <div class="clearfix">
+          <GrowthTrend style="float:left;" />
+          <GrowthTrendB style="float:left;" />
+        </div>
       </div>
     </div>
     <div class="contanier_r">
@@ -44,12 +48,16 @@
         <p class="fl" style="display:inline-block;">业务数据</p>
         <el-dropdown>
           <el-button type="primary" size="mini">
-            2019-9
+            {{first}}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
-          <el-dropdown-menu slot="dropdown" @click="handleClick()">
-            <el-dropdown-item>2019-9</el-dropdown-item>
-            <el-dropdown-item>2018-8</el-dropdown-item>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item
+              v-for="item in month"
+              :key="item.idx"
+              @click.native="handleClick('first',item.value)"
+            >{{item.value}}</el-dropdown-item>
+            <!-- <el-dropdown-item>2018-8</el-dropdown-item> -->
           </el-dropdown-menu>
         </el-dropdown>
         <div class="manageDate clearfix">
@@ -78,38 +86,92 @@
       <!-- 用户增长量 -->
       <div class="contanier_r_item boxShadow bdRadius">
         <p class="fl" style="display:inline-block;">用户增长量</p>
-        <span style="font-size:14px;">截止日期</span>
+        <span style="font-size:12px;padding-left:10px;">截止日期</span>
         <el-dropdown>
           <el-button type="primary" size="mini">
-            2019-11
+            {{second}}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
-          <el-dropdown-menu slot="dropdown" @click="handleClick()">
-            <el-dropdown-item>2019-11</el-dropdown-item>
-            <el-dropdown-item>2018-10</el-dropdown-item>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item
+              v-for="item in month"
+              :key="item.idx"
+              @click.native="handleClick('second',item.value)"
+            >{{item.value}}</el-dropdown-item>
+            <!-- <el-dropdown-item>2018-8</el-dropdown-item> -->
           </el-dropdown-menu>
         </el-dropdown>
+        <userAdd/>
       </div>
       <!-- 线上交易增长量 -->
       <div class="contanier_r_item boxShadow bdRadius">
-        <h3>线上交易增长量</h3>
+        <p class="fl" style="display:inline-block;">线上交易增长量</p>
+        <span style="font-size:12px;padding-left:10px;">截止日期</span>
+        <el-dropdown>
+          <el-button type="primary" size="mini">
+            {{three}}
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item
+              v-for="item in month"
+              :key="item.idx"
+              @click.native="handleClick('three',item.value)"
+            >{{item.value}}</el-dropdown-item>
+            <!-- <el-dropdown-item>2018-8</el-dropdown-item> -->
+          </el-dropdown-menu>
+        </el-dropdown>
+        <onlineAdd/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Maps from "../common/map";
+import GrowthTrend from "../common/growthTrend";
+import GrowthTrendB from "../common/growthTrendB";
+import UserAdd from "../common/userAdd";
+import OnlineAdd from "../common/onlineAdd";
+
 export default {
   name: "home",
   data() {
     return {
-      loginManage: ""
+      month: [
+        {
+          idx: "1",
+          value: "2018-8"
+        },
+        {
+          idx: "2",
+          value: "2018-9"
+        }
+      ],
+      first: "2018-9",
+      second: "2018-8",
+      three:'2018-9'
     };
   },
   methods: {
-    handleClick() {
-      alert("button click");
+    handleClick(obj, value) {
+      if (obj == "first") {
+        this.first = value;
+      }
+      if (obj == "second") {
+        this.second = value;
+      }
+      if (obj == "three") {
+        this.three = value;
+      }
     }
+  },
+  components: {
+    Maps,
+    GrowthTrend,
+    GrowthTrendB,
+    UserAdd,
+    OnlineAdd
   }
 };
 </script>
@@ -117,11 +179,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .home {
-  height: 100vh;
   color: #fff;
-  overflow: hidden;
   box-sizing: border-box;
-  padding: 40px 10px 40px 0;
+  padding: 30px 10px 30px 0;
 }
 .boxShadow {
   box-shadow: 0px 0px 30px #213558 inset;
@@ -137,28 +197,30 @@ export default {
   text-align: left;
 }
 .contanier_l {
-  width: 51%;
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
 }
-.contanier_l_map,
-.contanier_l_add {
+.contanier_l .contanier_l_map,
+.contanier_l .contanier_l_add {
   box-sizing: border-box;
   width: 100%;
   padding-left: 40px;
   padding-top: 44px;
 }
 .contanier_l_map {
-  height: 600px;
+  height: 500px;
 }
 h2 {
   font-size: 30px;
 }
 .contanier_l_add {
   margin-top: 20px;
-  height: 280px;
+  flex: 1;
 }
 /* 右边 */
 .contanier_r {
-  width: 46%;
+  width: 650px;
   height: 100%;
   font-size: 18px;
 }
@@ -178,11 +240,8 @@ h2 {
   align-items: center;
   text-align: center;
 }
-
-p {
-  padding-right: 10px;
-  height: 26px;
-  line-height: 26px;
+.userNum_item p {
+  font-size: 20px;
 }
 .userNum_item_num {
   padding: 20px 0;
@@ -190,6 +249,7 @@ p {
 /* 业务管理 */
 .manageDate_item {
   position: relative;
+  margin: 0 10px;
 }
 .manageDate_item span {
   position: absolute;
@@ -202,6 +262,18 @@ p {
   left: 60%;
   top: 30px;
   font-size: 12px;
+}
+/* 日期下拉框 */
+.home >>> .el-button--primary {
+  background-color: #0c164b;
+  border-color: #2b396a;
+}
+.home .el-dropdown {
+  margin-left: 10px;
+  top: -2px;
+}
+.home .el-button--mini {
+  padding: 4px 10px;
 }
 </style>
 

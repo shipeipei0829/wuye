@@ -27,13 +27,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .index {
-  height: 100vh;
   background: #071530;
   display: flex;
+  min-height: 100vh;
 }
 .nav {
-  width: 240px;
-  height: 100%;
+  width: 200px;
+  min-height: 100vh;
   border:1px solid #213558;
   box-sizing: border-box;
 }
@@ -63,7 +63,6 @@ a {
 .right{
   flex: 1;
   background: url('../../assets/images/bg_right.png') 40% 40% no-repeat;
-  background-size: 
 }
 </style>
 

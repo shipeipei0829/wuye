@@ -26,12 +26,16 @@ export default new Router({
         {
           path: 'fenbu',
           component: Fenbu,
-        }, 
+        },
         {
-          path:'',
-          redirect:'home'
+          path: '',
+          redirect: 'home'
         }
       ]
+    },
+    {
+      path: '*',
+      redirect: '/login'
     }
   ]
 })
