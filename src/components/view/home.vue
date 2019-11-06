@@ -8,6 +8,7 @@
       <!-- 增长趋势对比 -->
       <div class="contanier_l_add boxShadow bdRadius">
         <h3>增长趋势对比</h3>
+        
       </div>
     </div>
     <div class="contanier_r">
@@ -43,7 +44,7 @@
         <p class="fl" style="display:inline-block;">业务数据</p>
         <el-dropdown>
           <el-button type="primary" size="mini">
-            更多菜单
+            2019-9
             <i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
           <el-dropdown-menu slot="dropdown" @click="handleClick()">
@@ -76,7 +77,18 @@
       </div>
       <!-- 用户增长量 -->
       <div class="contanier_r_item boxShadow bdRadius">
-        <h3>用户增长量</h3>
+        <p class="fl" style="display:inline-block;">用户增长量</p>
+        <span style="font-size:14px;">截止日期</span>
+        <el-dropdown>
+          <el-button type="primary" size="mini">
+            2019-11
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </el-button>
+          <el-dropdown-menu slot="dropdown" @click="handleClick()">
+            <el-dropdown-item>2019-11</el-dropdown-item>
+            <el-dropdown-item>2018-10</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
       <!-- 线上交易增长量 -->
       <div class="contanier_r_item boxShadow bdRadius">
@@ -166,8 +178,11 @@ h2 {
   align-items: center;
   text-align: center;
 }
-.userNum_item p {
-  font-size: 20px;
+
+p {
+  padding-right: 10px;
+  height: 26px;
+  line-height: 26px;
 }
 .userNum_item_num {
   padding: 20px 0;
