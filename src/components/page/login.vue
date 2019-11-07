@@ -51,7 +51,6 @@ export default {
         }
       }
       // 密码
-      
     };
     return {
       loginManage: "userLogin",
@@ -74,17 +73,15 @@ export default {
       console.log(tab, event);
     },
     //登录
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+    submitForm(ruleForm) {
+      this.$refs[ruleForm].validate(valid => {
         if (valid) {
-          alert("submit!");
+          this.$router.replace("/index");
         } else {
           console.log("error submit!!");
           return false;
         }
       });
-
-      // this.$router.replace("/index");
     }
   }
 };

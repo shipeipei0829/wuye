@@ -32,28 +32,28 @@
               <el-col :span="6">
                 <div class="userNum_item">
                   <p class="userNum_item_num">50家</p>
-                  <img src="../../assets/images/register-company.png" alt  style="width:50%;"/>
+                  <img src="../../assets/images/register-company.png" alt style="width:50%;" />
                   <p>注册公司</p>
                 </div>
               </el-col>
               <el-col :span="6">
                 <div class="userNum_item">
                   <p class="userNum_item_num">80个</p>
-                  <img src="../../assets/images/register-project.png" alt  style="width:50%;"/>
+                  <img src="../../assets/images/register-project.png" alt style="width:50%;" />
                   <p>注册项目</p>
                 </div>
               </el-col>
               <el-col :span="6">
                 <div class="userNum_item">
                   <p class="userNum_item_num">180位</p>
-                  <img src="../../assets/images/register-staff.png" alt  style="width:50%;"/>
+                  <img src="../../assets/images/register-staff.png" alt style="width:50%;" />
                   <p>注册员工</p>
                 </div>
               </el-col>
               <el-col :span="6">
                 <div class="userNum_item">
                   <p class="userNum_item_num">300位</p>
-                  <img src="../../assets/images/register-user.png" alt  style="width:50%;"/>
+                  <img src="../../assets/images/register-user.png" alt style="width:50%;" />
                   <p>注册用户</p>
                 </div>
               </el-col>
@@ -76,7 +76,7 @@
                 <!-- <el-dropdown-item>2018-8</el-dropdown-item> -->
               </el-dropdown-menu>
             </el-dropdown>
-            <el-row >
+            <el-row>
               <el-col :span="6">
                 <div class="manageDate_item">
                   <img src="../../assets/images/visitor-number.png" alt style="width:100%;" />
@@ -109,6 +109,7 @@
           </div>
           <!-- 用户增长量 -->
           <div class="contanier_r_item boxShadow bdRadius">
+            123456
             <p class="fl" style="display:inline-block;">用户增长量</p>
             <span style="font-size:12px;padding-left:10px;">截止日期</span>
             <el-dropdown>
@@ -251,8 +252,8 @@ h2 {
   font-size: 18px;
 }
 .contanier_r_item {
-  padding: 10px 20px 0 20px;
-  margin-bottom: 20px;
+  /* padding: 10px 20px 0 20px; */
+  /* margin-bottom: 20px; */
 }
 /* 用户量 */
 .userNum_item p {

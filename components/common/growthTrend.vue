@@ -168,6 +168,6 @@ export default {
 <style scoped>
 .growthTrend {
   /* width: 600px; */
-  height: 300px;
+  height: 200px;
 }
 </style>

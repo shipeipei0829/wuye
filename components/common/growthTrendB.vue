@@ -41,7 +41,7 @@ export default {
             center: ["50%", "60%"],
             data: [
               { value: 2345, name: "商业" },
-              { value: 1234, name: "住宅" },
+              { value: 1234, name: "住宅" }
             ],
             itemStyle: {
               emphasis: {
@@ -61,8 +61,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.growthTrendB{
+.growthTrendB {
   /* width: 300px; */
-  height: 200px;;
+  height: 100px;
 }
 </style>

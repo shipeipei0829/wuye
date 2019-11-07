@@ -29,7 +29,7 @@
     </div>
 
     <!-- 底部 -->
-    <p class="footer">山西蓝众网络科技有限公司提供技术支持</p>
+    <p class="footer">山西蓝众网络科技qqq有限公司提供技术支持</p>
   </div>
 </template>
 
@@ -81,8 +81,8 @@ export default {
       console.log(tab, event);
     },
     //登录
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+    submitForm(ruleForm) {
+      this.$refs[ruleForm].validate(valid => {
         if (valid) {
           this.$router.replace("/index");
         } else {
