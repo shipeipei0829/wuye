@@ -37,6 +37,7 @@
 export default {
   name: "login",
   data() {
+    // 手机号
     var checkPhone = (rule, value, callback) => {
       if (!value) {
         return callback(new Error("手机号不能为空"));
@@ -49,6 +50,8 @@ export default {
           return callback(new Error("请输入正确的手机号"));
         }
       }
+      // 密码
+      
     };
     return {
       loginManage: "userLogin",
