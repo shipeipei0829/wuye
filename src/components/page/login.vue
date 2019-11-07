@@ -10,19 +10,35 @@
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
             <el-form-item prop="phone">
               <span class="borderR">
-                <i class="el-icon-edit"></i>
+                <img src="../../assets/images/phone.png" alt />
               </span>
               <el-input v-model="ruleForm.phone" placeholder="请输入您的手机号" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item prop="password">
               <span class="borderR">
-                <i class="el-icon-edit"></i>
+                <img src="../../assets/images/pwd.png" alt />
               </span>
               <el-input v-model="ruleForm.password" placeholder="请输入您的密码" auto-complete="off"></el-input>
             </el-form-item>
           </el-form>
         </el-tab-pane>
-        <el-tab-pane label="公司项目用户登录" name="companyLogin"></el-tab-pane>
+        <el-tab-pane label="公司项目用户登录" name="companyLogin">
+          <!-- 登录框 -->
+          <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+            <el-form-item prop="phone">
+              <span class="borderR">
+                <img src="../../assets/images/phone.png" alt />
+              </span>
+              <el-input v-model="ruleForm.phone" placeholder="请输入您的手机号" auto-complete="off"></el-input>
+            </el-form-item>
+            <el-form-item prop="password">
+              <span class="borderR">
+                <img src="../../assets/images/pwd.png" alt />
+              </span>
+              <el-input v-model="ruleForm.password" placeholder="请输入您的密码" auto-complete="off"></el-input>
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
       </el-tabs>
       <!-- 按钮 -->
       <el-button type="primary" round @click="submitForm('ruleForm')">登录</el-button>
@@ -34,10 +50,11 @@
 </template>
 
 <script>
+import axios from "axios";
+import API from "../../common/js/api";
 export default {
   name: "login",
   data() {
-    // 手机号
     var checkPhone = (rule, value, callback) => {
       if (!value) {
         return callback(new Error("手机号不能为空"));
@@ -50,7 +67,19 @@ export default {
           return callback(new Error("请输入正确的手机号"));
         }
       }
-      // 密码
+    };
+    var checkPassword = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("密码不能为空"));
+      } else {
+        const reg = /^(\w){6,20}$/;
+        console.log(reg.test(value));
+        if (reg.test(value)) {
+          callback();
+        } else {
+          return callback(new Error("只能输入6-20个字母、数字、下划线"));
+        }
+      }
     };
     return {
       loginManage: "userLogin",
@@ -60,17 +89,14 @@ export default {
       },
       rules: {
         phone: [{ validator: checkPhone, trigger: "blur" }],
-        password: [
-          { required: true, message: "请输入正确的密码", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
-        ]
+        password: [{ validator: checkPassword, trigger: "blur" }]
       }
     };
   },
   methods: {
     //登录tab切换
     handleClick(tab, event) {
-      console.log(tab, event);
+      // console.log(tab, event);
     },
     //登录
     submitForm(ruleForm) {
@@ -83,6 +109,23 @@ export default {
         }
       });
     }
+  },
+  mounted() {
+    // 获取注册公司信息
+    axios({
+      url: API.queryCompany,
+      method: "post",
+      data: {
+        phone: "18235143167"
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch();
   }
 };
 </script>
@@ -90,22 +133,23 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .login {
-  min-height: 100vh;
-  overflow: hidden;
-  background-image: url("../../assets/images/loginBg.jpg");
-  background-size: 100% 100%;
+  height: 100%;
+  padding: 50px 0;
+  box-sizing: border-box;
+  overflow-y: hidden;
+  background: url("../../assets/images/loginBg.jpg") no-repeat;
 }
 .logo {
-  padding-top: 50px;
   vertical-align: bottom;
 }
 .login >>> .el-tabs .el-tabs--top {
   width: 400px !important;
+  height: 400px !important;
   margin: 0 auto;
 }
 .login >>> .el-form-item {
   height: 40px;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 .login >>> .el-form-item__content {
   height: 100%;
@@ -126,12 +170,17 @@ export default {
 }
 .el-button {
   width: 250px;
+  margin-top: 80px;
   font-size: 20px;
 }
 .footer {
   font-size: 12px;
   color: #fff;
   padding-top: 200px;
+  /* position: fixed;
+  bottom: 26px; */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
 }
 .borderR {
   border-right: 1px solid #fff;
@@ -139,7 +188,26 @@ export default {
   margin-top: 10px;
   padding: 0 20px;
 }
+span {
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: relative;
+}
+span img {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
 .login >>> .el-tabs__item.is-active {
   color: #fff;
+}
+.login >>> .el-tabs__item.is-active {
+  font-size: 22px !important;
+  margin-top: 20px !important;
+}
+.login >>> .el-tabs__item {
+  font-size: 22px !important;
+  margin-top: 20px !important;
 }
 </style>

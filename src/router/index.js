@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/page/login'
+
 import Index from '@/components/page/index'
 import Home from '@/components/view/home'
 import Fenbu from '@/components/view/fenbu'
@@ -12,7 +12,7 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: () => import('@/components/page/login')
     },
     {
       path: '/index',
@@ -39,3 +39,11 @@ export default new Router({
     }
   ]
 })
+// 路由拦截
+// Router.beforeEach((to, from, next) => {
+//   if (to.path == '/login') { //如果是登录页面路径，就直接next()
+//     next();
+//   } else { //不然就跳转到登录；
+//     next('/login');
+//   }
+// })

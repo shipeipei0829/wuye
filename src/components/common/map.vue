@@ -1,7 +1,7 @@
 <template>
-  <div class="content row-flex-start">
+  <div class="content row-flex-start" id="content">
     <slot name="title" class="title"></slot>
-    <div class="left_map" id="left_map" @click="showChinaMap()"></div>
+    <div class="left_map" id="left_map" @click="showChinaMap"></div>
     <!-- <div class="right_opetate row-center" id="right_opetate"></div> -->
   </div>
 </template>
@@ -9,7 +9,8 @@
 <script>
 import echarts from "echarts";
 import china from "../../../node_modules/echarts/map/json/china.json";
-// import axios from "axios";
+import axios from "axios";
+var elementResizeDetectorMaker = require("element-resize-detector"); //监听dom大小变化
 echarts.registerMap("china", china);
 var provinces = [
   "shanghai",
@@ -96,7 +97,7 @@ export default {
   data() {
     return {
       map: {},
-      // cityOpt: [],
+      cityOpt: [],
       mapForm: {},
       mapData: [{ name: "海门", value: 100 }],
       mapOpt: []
@@ -142,19 +143,26 @@ export default {
       });
       return option;
     },
+
     //显示中国地图
     showChinaMap() {
       let option = this.getMapOpt();
       this.map.setOption(option, true);
     },
     //显示各省地图
-    // getProvinceMapOpt(provinceAlphabet) {
-    //   axios.get("static/province/" + provinceAlphabet + ".json").then(s => {
-    //     echarts.registerMap(provinceAlphabet, s.data);
-    //     let option = this.getMapOpt(provinceAlphabet);
-    //     this.map.setOption(option, true);
-    //   });
-    // },
+    getProvinceMapOpt(provinceAlphabet) {
+      console.log(provinceAlphabet);
+      axios
+        .get("static/province/" + provinceAlphabet + ".json")
+        .then(s => {
+          echarts.registerMap(provinceAlphabet, s.data);
+          let option = this.getMapOpt(provinceAlphabet);
+          this.map.setOption(option, true);
+        })
+        .catch(err => {
+          console.log("找不到");
+        });
+    },
     //初始化方法，生成中国地图及定义点击事件
     initMap() {
       var dom = document.getElementById("left_map");
@@ -163,16 +171,33 @@ export default {
       let option = this.getMapOpt();
       if (option && typeof option === "object") {
         this.map.setOption(option, true);
+        // //根据窗口的大小变动图表 --- 重点
+        // 尺寸重置
+        var that = this;
+        var erd = elementResizeDetectorMaker();
+        erd.listenTo(document.getElementById("left_map").parentNode, function(
+          element
+        ) {
+          var width = element.offsetWidth;
+          var height = element.offsetHeight;
+          that.$nextTick(function() {
+            console.log("Size: " + width + "x" + height);
+            //使echarts尺寸重置
+            that.$echarts.init(document.getElementById("left_map")).resize();
+          });
+        });
       }
       this.map.on("click", param => {
         event.stopPropagation(); // 阻止冒泡
         // 找到省份名
+        console.log(param);
         let provinceIndex = provincesText.findIndex(x => {
           return param.name === x;
         });
         if (provinceIndex === -1) return;
         let provinceAlphabet = provinces[provinceIndex];
         // 重新渲染各省份地图
+        console.log(provinceAlphabet);
         this.getProvinceMapOpt(provinceAlphabet);
       });
     }
@@ -184,6 +209,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .content {
+  width: 100%;
   height: 100%;
 }
 .left_map {
@@ -200,5 +226,4 @@ export default {
 }
 .map_form {
 }
-
 </style>

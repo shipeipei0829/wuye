@@ -3,6 +3,7 @@
 </template>
 
 <script>
+var elementResizeDetectorMaker = require("element-resize-detector");
 export default {
   name: "onlineAdd",
   data: () => ({
@@ -64,12 +65,25 @@ export default {
             textStyle: {
               color: "#fff"
             }
-          },
-         
+          }
         },
         // Declare several bar series, each will be mapped
         // to a column of dataset.source by default.
         series: [{ type: "bar", barWidth: 10 }, { type: "bar", barWidth: 10 }]
+      });
+      // 尺寸重置
+      var that = this;
+      var erd = elementResizeDetectorMaker();
+      erd.listenTo(document.getElementById("onlineAdd").parentNode, function(
+        element
+      ) {
+        var width = element.offsetWidth;
+        var height = element.offsetHeight;
+        that.$nextTick(function() {
+          console.log("Size: " + width + "x" + height);
+          //使echarts尺寸重置
+          that.$echarts.init(document.getElementById("onlineAdd")).resize();
+        });
       });
     }
   }
@@ -79,7 +93,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .onlineAdd {
-  width: 600px;
-  height: 300px;
+  width: 100%;
+  height: 220px;
 }
 </style>

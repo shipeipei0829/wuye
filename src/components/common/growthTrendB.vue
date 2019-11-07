@@ -3,6 +3,7 @@
 </template>
 
 <script>
+var elementResizeDetectorMaker = require("element-resize-detector");
 export default {
   name: "growthTrendB",
   created() {},
@@ -41,7 +42,7 @@ export default {
             center: ["50%", "60%"],
             data: [
               { value: 2345, name: "商业" },
-              { value: 1234, name: "住宅" },
+              { value: 1234, name: "住宅" }
             ],
             itemStyle: {
               emphasis: {
@@ -53,6 +54,20 @@ export default {
           }
         ]
       });
+      // 尺寸重置
+      var that = this;
+      var erd = elementResizeDetectorMaker();
+      erd.listenTo(document.getElementById("growthTrendB").parentNode, function(
+        element
+      ) {
+        var width = element.offsetWidth;
+        var height = element.offsetHeight;
+        that.$nextTick(function() {
+          console.log("Size: " + width + "x" + height);
+          //使echarts尺寸重置
+          that.$echarts.init(document.getElementById("growthTrendB")).resize();
+        });
+      });
     }
   },
   computed: {}
@@ -61,8 +76,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.growthTrendB{
-  width: 300px;
-  height: 300px;;
+.growthTrendB {
+  /* width: 300px; */
+  height: 200px;
 }
 </style>

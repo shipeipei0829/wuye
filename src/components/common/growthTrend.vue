@@ -3,14 +3,7 @@
 </template>
 
 <script>
-// 引入基本模板
-let echarts = require("echarts/lib/echarts");
-// 引入柱状图组件
-require("echarts/lib/chart/bar");
-// 引入提示框和title组件
-require("echarts/lib/component/tooltip");
-require("echarts/lib/component/title");
-
+var elementResizeDetectorMaker = require("element-resize-detector");
 export default {
   name: "DataCount",
   data: () => ({
@@ -24,6 +17,7 @@ export default {
       // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(document.getElementById("growthTrend"));
       // 绘制图表
+      console.log(myChart);
       myChart.setOption({
         // backgroundColor: "#999",
         title: {
@@ -33,6 +27,10 @@ export default {
         },
         grid: {
           show: false
+        },
+        legend: {
+          left: "left",
+          data: ["ss", "zz"]
         },
         xAxis: {
           name: "年/月",
@@ -90,6 +88,7 @@ export default {
           },
           axisLabel: {
             show: true,
+            formatter: "{value}", //给Y轴数值
             textStyle: {
               color: "#fff"
             }
@@ -159,6 +158,20 @@ export default {
           }
         ]
       });
+      // 尺寸重置
+      var that = this;
+      var erd = elementResizeDetectorMaker();
+      erd.listenTo(document.getElementById("growthTrend").parentNode, function(
+        element
+      ) {
+        var width = element.offsetWidth;
+        var height = element.offsetHeight;
+        that.$nextTick(function() {
+          console.log("Size: " + width + "x" + height);
+          //使echarts尺寸重置
+          that.$echarts.init(document.getElementById("growthTrend")).resize();
+        });
+      });
     }
   }
 };
@@ -167,7 +180,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .growthTrend {
-  width: 600px;
-  height: 300px;
+  /* width: 600px; */
+  height: 242px;
 }
 </style>

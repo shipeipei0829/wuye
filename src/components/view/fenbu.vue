@@ -1,19 +1,25 @@
 <template>
   <div class="fenbu clearfix">
-    <!-- 用戶分布 -->
-    <Maps class="maps boxShadow bdRadius">
-      <h2 slot="title" style="font-size:20px;text-align:left;padding:20px 0 0 20px;">用戶分布</h2>
-    </Maps>
-    <!-- 省份統計表格 -->
-    <div class="tongji boxShadow bdRadius" style="width:600px;height：100%;float:left;">
-      <el-table :data="tableData" stripe style align="center">
-        <el-table-column prop="prov" label="省份" width="100" align="center"></el-table-column>
-        <el-table-column prop="comp" label="注册公司" width align="center"></el-table-column>
-        <el-table-column prop="proj" label="注册项目" width align="center"></el-table-column>
-        <el-table-column prop="job" label="注册员工" width align="center"></el-table-column>
-        <el-table-column prop="user" label="注册用户" align="center"></el-table-column>
-      </el-table>
-    </div>
+    <el-row :gutter="20">
+      <el-col :span="14">
+        <!-- 用戶分布 -->
+        <Maps class="maps boxShadow bdRadius">
+          <h2 slot="title" style="font-size:20px;text-align:left;padding:20px 0 0 20px;">用戶分布</h2>
+        </Maps>
+      </el-col>
+      <el-col :span="10">
+        <!-- 省份統計表格 -->
+        <div class="tongji boxShadow bdRadius" style>
+          <el-table :data="tableData" stripe style align="center" height="930">
+            <el-table-column prop="prov" label="省份" width="100" align="center"></el-table-column>
+            <el-table-column prop="comp" label="注册公司" width align="center"></el-table-column>
+            <el-table-column prop="proj" label="注册项目" width align="center"></el-table-column>
+            <el-table-column prop="job" label="注册员工" width align="center"></el-table-column>
+            <el-table-column prop="user" label="注册用户" align="center"></el-table-column>
+          </el-table>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -93,6 +99,20 @@ export default {
           proj: "80",
           job: "1000",
           user: "1500"
+        },
+        {
+          prov: "山东省",
+          comp: "100",
+          proj: "80",
+          job: "1000",
+          user: "1500"
+        },
+        {
+          prov: "山东省",
+          comp: "100",
+          proj: "80",
+          job: "1000",
+          user: "1500"
         }
       ]
     };
@@ -108,20 +128,14 @@ export default {
 <style scoped>
 .fenbu {
   color: #fff;
-  min-height: 100vh;
-  box-sizing: border-box;
-  padding: 20px;
+  height: 100%;
 }
-.maps {
-  width: 1000px;
-  height: 80%;
-  float: left;
-}
-.tongji{
-  margin-left:20px;
+.fenbu >>> .left_map {
+  height: 890px;
 }
 .fenbu >>> .el-table {
   background-color: transparent;
+  height: 930px;
 }
 .fenbu >>> .el-table_1_column_1 {
   color: #fff !important;
@@ -140,6 +154,7 @@ export default {
 }
 .fenbu >>> .el-table__row {
   background-color: rgba(0, 0, 0, 0.1);
+  height: 80px;
 }
 .fenbu >>> .el-table__row--striped {
   background-color: rgba(255, 255, 255, 0.1) !important;
@@ -152,6 +167,7 @@ export default {
 }
 .fenbu >>> .has-gutter tr {
   background-color: rgba(255, 255, 255, 0.1) !important;
+  height: 80px;
 }
 .fenbu >>> .el-table td,
 .el-table th.is-leaf {
@@ -159,6 +175,9 @@ export default {
 }
 .fenbu >>> .el-table th.is-leaf {
   border-bottom: none;
+}
+.el-table::before {
+  background-color: transparent;
 }
 </style>
 

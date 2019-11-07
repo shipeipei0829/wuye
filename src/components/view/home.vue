@@ -1,129 +1,155 @@
 <template>
   <div class="home">
-    <div class="contanier_l">
-      <!-- 项目分布图 -->
-      <div class="contanier_l_map boxShadow bdRadius">
-        <h2>项目分布图</h2>
-        <Maps />
-      </div>
-      <!-- 增长趋势对比 -->
-      <div class="contanier_l_add boxShadow bdRadius">
-        <h3>增长趋势对比</h3>
-        <div class="clearfix">
-          <GrowthTrend style="float:left;" />
-          <GrowthTrendB style="float:left;" />
-        </div>
-      </div>
-    </div>
-    <div class="contanier_r">
-      <!-- 用户量 -->
-      <div class="contanier_r_item boxShadow bdRadius clearfix">
-        <p class="fl" style="display:inline-block;">用户量</p>
-        <span style="font-size:12px;">截止到昨日用户量达到：</span>
-        <div class="userNum clearfix">
-          <div class="userNum_item">
-            <p class="userNum_item_num">50家</p>
-            <img src="../../assets/images/register-company.png" alt />
-            <p>注册公司</p>
+    <el-row :gutter="20">
+      <el-col :span="14">
+        <div class="contanier_l">
+          <!-- 项目分布图 -->
+          <div class="contanier_l_map boxShadow bdRadius">
+            <h2>项目分布图</h2>
+            <Maps />
           </div>
-          <div class="userNum_item">
-            <p class="userNum_item_num">80个</p>
-            <img src="../../assets/images/register-project.png" alt />
-            <p>注册项目</p>
-          </div>
-          <div class="userNum_item">
-            <p class="userNum_item_num">180位</p>
-            <img src="../../assets/images/register-staff.png" alt />
-            <p>注册员工</p>
-          </div>
-          <div class="userNum_item">
-            <p class="userNum_item_num">300位</p>
-            <img src="../../assets/images/register-user.png" alt />
-            <p>注册用户</p>
+          <!-- 增长趋势对比 -->
+          <div class="contanier_l_add boxShadow bdRadius">
+            <h3>增长趋势对比</h3>
+            <el-row>
+              <el-col :span="16">
+                <GrowthTrend />
+              </el-col>
+              <el-col :span="8">
+                <GrowthTrendB />
+              </el-col>
+            </el-row>
           </div>
         </div>
-      </div>
-      <!-- 业务数据 -->
-      <div class="contanier_r_item boxShadow bdRadius">
-        <p class="fl" style="display:inline-block;">业务数据</p>
-        <el-dropdown>
-          <el-button type="primary" size="mini">
-            {{first}}
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item
-              v-for="item in month"
-              :key="item.idx"
-              @click.native="handleClick('first',item.value)"
-            >{{item.value}}</el-dropdown-item>
-            <!-- <el-dropdown-item>2018-8</el-dropdown-item> -->
-          </el-dropdown-menu>
-        </el-dropdown>
-        <div class="manageDate clearfix">
-          <div class="manageDate_item">
-            <img src="../../assets/images/visitor-number.png" alt />
-            <span>工单数量</span>
-            <i>80个</i>
+      </el-col>
+      <el-col :span="10">
+        <div class="contanier_r">
+          <!-- 用户量 -->
+          <div class="contanier_r_item boxShadow bdRadius clearfix">
+            <p class="fl" style="display:inline-block;">用户量</p>
+            <span style="font-size:12px;">截止到昨日用户量达到：</span>
+            <el-row>
+              <el-col :span="6">
+                <div class="userNum_item">
+                  <p class="userNum_item_num">50家</p>
+                  <img src="../../assets/images/register-company.png" alt style="width:50%;" />
+                  <p>注册公司</p>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="userNum_item">
+                  <p class="userNum_item_num">80个</p>
+                  <img src="../../assets/images/register-project.png" alt style="width:50%;" />
+                  <p>注册项目</p>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="userNum_item">
+                  <p class="userNum_item_num">180位</p>
+                  <img src="../../assets/images/register-staff.png" alt style="width:50%;" />
+                  <p>注册员工</p>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="userNum_item">
+                  <p class="userNum_item_num">300位</p>
+                  <img src="../../assets/images/register-user.png" alt style="width:50%;" />
+                  <p>注册用户</p>
+                </div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="manageDate_item">
-            <img src="../../assets/images/inspection-number.png" alt />
-            <span>巡检数量</span>
-            <i>1500个</i>
+          <!-- 业务数据 -->
+          <div class="contanier_r_item boxShadow bdRadius" style="padding-bottom:20px;">
+            <p class="fl" style="display:inline-block;">业务数据</p>
+            <el-dropdown>
+              <el-button type="primary" size="mini">
+                {{first}}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item
+                  v-for="item in month"
+                  :key="item.idx"
+                  @click.native="handleClick('first',item.value)"
+                >{{item.value}}</el-dropdown-item>
+                <!-- <el-dropdown-item>2018-8</el-dropdown-item> -->
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-row>
+              <el-col :span="6">
+                <div class="manageDate_item">
+                  <img src="../../assets/images/visitor-number.png" alt style="width:100%;" />
+                  <span>工单数量</span>
+                  <i>80个</i>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="manageDate_item">
+                  <img src="../../assets/images/inspection-number.png" alt style="width:100%;" />
+                  <span>巡检数量</span>
+                  <i>1500个</i>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="manageDate_item">
+                  <img src="../../assets/images/money-number.png" alt style="width:100%;" />
+                  <span>访客数量</span>
+                  <i>2000个</i>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="manageDate_item">
+                  <img src="../../assets/images/order-number.png" alt style="width:100%;" />
+                  <span>线上交易额</span>
+                  <i>200万</i>
+                </div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="manageDate_item">
-            <img src="../../assets/images/money-number.png" alt />
-            <span>访客数量</span>
-            <i>2000个</i>
+          <!-- 用户增长量 -->
+          <div class="contanier_r_item boxShadow bdRadius">
+            <p class="fl" style="display:inline-block;">用户增长量</p>
+            <span style="font-size:12px;padding-left:10px;">截止日期</span>
+            <el-dropdown>
+              <el-button type="primary" size="mini">
+                {{second}}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item
+                  v-for="item in month"
+                  :key="item.idx"
+                  @click.native="handleClick('second',item.value)"
+                >{{item.value}}</el-dropdown-item>
+                <!-- <el-dropdown-item>2018-8</el-dropdown-item> -->
+              </el-dropdown-menu>
+            </el-dropdown>
+            <userAdd />
           </div>
-          <div class="manageDate_item">
-            <img src="../../assets/images/order-number.png" alt />
-            <span>线上交易额</span>
-            <i>200万</i>
+          <!-- 线上交易增长量 -->
+          <div class="contanier_r_item boxShadow bdRadius">
+            <p class="fl" style="display:inline-block;">线上交易增长量</p>
+            <span style="font-size:12px;padding-left:10px;">截止日期</span>
+            <el-dropdown>
+              <el-button type="primary" size="mini">
+                {{three}}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item
+                  v-for="item in month"
+                  :key="item.idx"
+                  @click.native="handleClick('three',item.value)"
+                >{{item.value}}</el-dropdown-item>
+                <!-- <el-dropdown-item>2018-8</el-dropdown-item> -->
+              </el-dropdown-menu>
+            </el-dropdown>
+            <onlineAdd />
           </div>
         </div>
-      </div>
-      <!-- 用户增长量 -->
-      <div class="contanier_r_item boxShadow bdRadius">
-        <p class="fl" style="display:inline-block;">用户增长量</p>
-        <span style="font-size:12px;padding-left:10px;">截止日期</span>
-        <el-dropdown>
-          <el-button type="primary" size="mini">
-            {{second}}
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item
-              v-for="item in month"
-              :key="item.idx"
-              @click.native="handleClick('second',item.value)"
-            >{{item.value}}</el-dropdown-item>
-            <!-- <el-dropdown-item>2018-8</el-dropdown-item> -->
-          </el-dropdown-menu>
-        </el-dropdown>
-        <userAdd/>
-      </div>
-      <!-- 线上交易增长量 -->
-      <div class="contanier_r_item boxShadow bdRadius">
-        <p class="fl" style="display:inline-block;">线上交易增长量</p>
-        <span style="font-size:12px;padding-left:10px;">截止日期</span>
-        <el-dropdown>
-          <el-button type="primary" size="mini">
-            {{three}}
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item
-              v-for="item in month"
-              :key="item.idx"
-              @click.native="handleClick('three',item.value)"
-            >{{item.value}}</el-dropdown-item>
-            <!-- <el-dropdown-item>2018-8</el-dropdown-item> -->
-          </el-dropdown-menu>
-        </el-dropdown>
-        <onlineAdd/>
-      </div>
-    </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -150,7 +176,7 @@ export default {
       ],
       first: "2018-9",
       second: "2018-8",
-      three:'2018-9'
+      three: "2018-9"
     };
   },
   methods: {
@@ -181,7 +207,7 @@ export default {
 .home {
   color: #fff;
   box-sizing: border-box;
-  padding: 30px 10px 30px 0;
+  min-height: 100vh;
 }
 .boxShadow {
   box-shadow: 0px 0px 30px #213558 inset;
@@ -192,12 +218,13 @@ export default {
 }
 .contanier_l,
 .contanier_r {
-  margin-left: 20px;
-  float: left;
   text-align: left;
+  padding-top: 20px;
+  height: 100%;
+  box-sizing: border-box;
 }
 .contanier_l {
-  width: 1000px;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -209,7 +236,7 @@ export default {
   padding-top: 44px;
 }
 .contanier_l_map {
-  height: 500px;
+  height: 600px;
 }
 h2 {
   font-size: 30px;
@@ -220,26 +247,15 @@ h2 {
 }
 /* 右边 */
 .contanier_r {
-  width: 650px;
+  width: 100%;
   height: 100%;
   font-size: 18px;
 }
 .contanier_r_item {
-  padding: 10px 20px 20px 20px;
-  margin-bottom: 20px;
+  padding: 10px 20px 0 20px; 
+   margin-bottom: 20px;
 }
 /* 用户量 */
-.userNum,
-.manageDate {
-  display: flex;
-}
-.userNum_item,
-.manageDate_item {
-  flex: 1;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
-}
 .userNum_item p {
   font-size: 20px;
 }
@@ -253,14 +269,14 @@ h2 {
 }
 .manageDate_item span {
   position: absolute;
-  left: 20%;
-  top: 10px;
+  left: 10%;
+  top: 10%;
   font-size: 12px;
 }
 .manageDate_item i {
   position: absolute;
-  left: 60%;
-  top: 30px;
+  right: 10%;
+  top: 30%;
   font-size: 12px;
 }
 /* 日期下拉框 */
