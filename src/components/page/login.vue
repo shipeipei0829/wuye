@@ -128,7 +128,7 @@ export default {
             }
           }).then(res => {
             console.log(res);
-            // this.$router.replace("/index");
+            this.$router.replace("/index");
           });
           // this.$router.replace("/index");
         } else {
