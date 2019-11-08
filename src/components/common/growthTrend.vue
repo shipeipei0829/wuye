@@ -25,12 +25,20 @@ export default {
           subtext: "",
           x: "center"
         },
+        legend: {
+          itemHeight: 12,
+          itemWidth: 24,
+          top: 0,
+          left: "0",
+          data: [{name:"商业",icon:'roundRect'}, {name:"住宅",icon:'roundRect'}],
+          textStyle: {
+            // fontSize: 14, //字体大小
+            color: "#ffffff" //字体颜色
+          }
+        },
+        color: ["rgba(20,91,169,0.7)", "rgba(118,43,73,0.5)"],
         grid: {
           show: false
-        },
-        legend: {
-          left: "left",
-          data: ["ss", "zz"]
         },
         xAxis: {
           name: "年/月",
@@ -96,7 +104,7 @@ export default {
         },
         series: [
           {
-            name: "",
+            name: "商业",
             data: [200, 320, 52, 580, 100, 600],
             type: "line",
             // 设置小圆点消失
@@ -120,7 +128,7 @@ export default {
             }
           },
           {
-            name: "",
+            name: "住宅",
             data: [620, 732, 941, 834, 100, 200],
             type: "line",
             symbol: "none",

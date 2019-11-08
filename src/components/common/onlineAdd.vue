@@ -19,26 +19,40 @@ export default {
 
       // 绘制图表
       myChart.setOption({
-        legend: {},
+        legend: {
+          top: 0,
+          right: "40",
+          data: ["商业", "住宅"],
+          textStyle: {
+            // fontSize: 14, //字体大小
+            color: "#ffffff" //字体颜色
+          }
+        },
         tooltip: {},
+        color: ["rgba(54,255,125,0.7)", "rgba(255,65,65,0.5)"],
         dataset: {
-          dimensions: ["product", "2015", "2016"],
+          dimensions: ["product", "商业", "住宅"],
           source: [
             {
               product: "2018-7",
-              "2015": 43.3,
-              "2016": 85.8
+              商业: 43.3,
+              住宅: 85.8
             },
-            { product: "2018-8", "2015": 83.1, "2016": 73.4 },
+            {
+              product: "2018-8",
+              商业: 43.3,
+              住宅: 85.8
+            },
+
             {
               product: "2018-9",
-              "2015": 86.4,
-              "2016": 65.2
+              商业: 86.4,
+              住宅: 65.2
             },
             {
               product: "2018-10",
-              "2015": 72.4,
-              "2016": 53.9
+              商业: 72.4,
+              住宅: 53.9
             }
           ]
         },

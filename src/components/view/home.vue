@@ -10,7 +10,22 @@
           </div>
           <!-- 增长趋势对比 -->
           <div class="contanier_l_add boxShadow bdRadius">
-            <h3>增长趋势对比</h3>
+            <p class="fl" style="display:inline-block;font-size:18px;">增长趋势对比</p>
+            <span style="font-size:12px;padding-left:10px;">截止日期</span>
+            <el-dropdown>
+              <el-button type="primary" size="mini">
+                {{date}}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item
+                  v-for="item in month"
+                  :key="item.idx"
+                  @click.native="handleClick('date',item.value)"
+                >{{item.value}}</el-dropdown-item>
+                <!-- <el-dropdown-item>2018-8</el-dropdown-item> -->
+              </el-dropdown-menu>
+            </el-dropdown>
             <el-row>
               <el-col :span="16">
                 <GrowthTrend />
@@ -174,6 +189,7 @@ export default {
           value: "2018-9"
         }
       ],
+      date: "2018-8",
       first: "2018-9",
       second: "2018-8",
       three: "2018-9"
@@ -181,6 +197,9 @@ export default {
   },
   methods: {
     handleClick(obj, value) {
+      if (obj == "date") {
+        this.date = value;
+      }
       if (obj == "first") {
         this.first = value;
       }
@@ -252,8 +271,8 @@ h2 {
   font-size: 18px;
 }
 .contanier_r_item {
-  padding: 10px 20px 0 20px; 
-   margin-bottom: 20px;
+  padding: 10px 20px 0 20px;
+  margin-bottom: 20px;
 }
 /* 用户量 */
 .userNum_item p {

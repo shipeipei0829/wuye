@@ -25,24 +25,42 @@ export default {
           subtext: "",
           x: "center"
         },
+        color: ["#762c47", "#135ba7"],
         tooltip: {
           trigger: "item",
           formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
         legend: {
-          orient: "vertical",
-          left: "left",
-          data: ["商业", "住宅"]
+          bottom: 0,
+          left: "center",
+          data: ["商业", "住宅"],
+          textStyle: {
+            // fontSize: 14, //字体大小
+            color: "#ffffff" //字体颜色
+          }
         },
         series: [
           {
             name: "访问来源",
             type: "pie",
             radius: "55%",
-            center: ["50%", "60%"],
+            center: ["50%", "40%"],
+            label: {
+              normal: {
+                show: true,
+                position: "inner", //标签的位置
+                textStyle: {
+                  fontWeight: 300,
+                  fontSize: 16 //文字的字体大小
+                },
+                formatter: function(d) {
+                  return d.percent.toFixed(0) + "%";
+                }
+              }
+            },
             data: [
-              { value: 2345, name: "商业" },
-              { value: 1234, name: "住宅" }
+              { value: 1234, name: "商业" },
+              { value: 2345, name: "住宅" }
             ],
             itemStyle: {
               emphasis: {

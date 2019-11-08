@@ -29,7 +29,21 @@
               <span class="borderR">
                 <img src="../../assets/images/phone.png" alt />
               </span>
-              <el-input v-model="ruleForm.phone" placeholder="请输入您的手机号" auto-complete="off"></el-input>
+              <el-input
+                v-model="ruleForm.phone"
+                placeholder="请输入您的手机号"
+                auto-complete="off"
+                @blur.native.capture="getMsg(ruleForm.phone)"
+              ></el-input>
+            </el-form-item>
+            <el-form-item prop="componey">
+              <span class="borderR">
+                <img src="../../assets/images/company.png" alt />
+              </span>
+              <el-select v-model="ruleForm.componey" placeholder="请选择您要登录的公司">
+                <el-option label="区域一" value="shanghai"></el-option>
+                <el-option label="区域二" value="beijing"></el-option>
+              </el-select>
             </el-form-item>
             <el-form-item prop="password">
               <span class="borderR">
@@ -51,6 +65,7 @@
 
 <script>
 import axios from "axios";
+import Qs from "qs";
 import API from "../../common/js/api";
 export default {
   name: "login",
@@ -82,10 +97,11 @@ export default {
       }
     };
     return {
-      loginManage: "userLogin",
+      loginManage: "companyLogin",
       ruleForm: {
-        phone: "",
-        password: ""
+        phone: "13133099365",
+        password: "123456",
+        companyId: "1034988020296560642"
       },
       rules: {
         phone: [{ validator: checkPhone, trigger: "blur" }],
@@ -102,31 +118,49 @@ export default {
     submitForm(ruleForm) {
       this.$refs[ruleForm].validate(valid => {
         if (valid) {
-          this.$router.replace("/index");
+          axios({
+            url: API.login,
+            method: "post",
+            data: {
+              companyId: ruleForm.companyId,
+              passWord: ruleForm.password,
+              phone: ruleForm.phone
+            }
+          }).then(res => {
+            console.log(res);
+            // this.$router.replace("/index");
+          });
+          // this.$router.replace("/index");
         } else {
           console.log("error submit!!");
           return false;
         }
       });
+    },
+    //  输入手机号失焦请求
+    getMsg(phone) {
+      // 获取注册公司信息
+      axios({
+        url: API.queryCompany,
+        method: "post",
+        data: {
+          phone: phone
+        },
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        transformRequest: [
+          function(data) {
+            data = Qs.stringify(data);
+            return data;
+          }
+        ] //加上这个
+      })
+        .then(res => {
+          console.log(res);
+        })
+        .catch();
     }
   },
-  mounted() {
-    // 获取注册公司信息
-    axios({
-      url: API.queryCompany,
-      method: "post",
-      data: {
-        phone: "18235143167"
-      },
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => {
-        console.log(res);
-      })
-      .catch();
-  }
+  mounted() {}
 };
 </script>
 

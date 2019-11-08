@@ -12,14 +12,13 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: "http://192.168.1.244:8088/property-statistics-web", // API服务所在IP及端口号
+        target: "http://192.168.1.244:8088", // API服务所在IP及端口号
         changeOrigin: true, // 如果设置为true,那么本地会虚拟一个服务器接收你的请求并代你发送该请求，这样就不会有跨域问题（只适合开发环境）
         pathRewrite: {
-          '^/api': "/" // 重写路径
+          '^/api': "http://192.168.1.244:8088" // 重写路径
         }
       }
     },
-
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
